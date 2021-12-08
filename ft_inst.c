@@ -67,6 +67,7 @@ void ft_ra_rb(t_list **a)
      printf(" %d ",*(int *)(*a) -> content);
      *a = list;
 }
+
 void ft_rra_rrb(t_list **a)
 {
     t_list *node;
@@ -77,3 +78,4 @@ void ft_rra_rrb(t_list **a)
     (*a) = (*a) -> next;
     free(list);
 }
+ 

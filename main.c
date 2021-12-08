@@ -15,6 +15,7 @@ void ft_sa(t_list *a);
 void ft_pa(t_list **b,t_list **a);
 void ft_ra_rb(t_list **a);
 void ft_rra_rrb(t_list **a);
+void ft_pb(t_list **b,t_list **a);
 int *f(int a)
 {
     int *ptr;
@@ -22,39 +23,40 @@ int *f(int a)
 	*ptr = a;
 	return ptr;
 }
-
-// void print_f(t_list *a) {
-
-//    t_list *ptr = a;
-//    printf("\n[ ");
-
-//    //start from the beginning
-//    while(ptr)
-//    {
-//       printf("( %d ) ",*(int *)ptr -> content);
-//       ptr = ptr->next;
-//    }
-//    printf(" ]");
-// }
-
-int main()
+int main(int argc, char **argv)
 {
 	t_list *a;
     t_list *b;
 	t_list *node;
-    t_list *n;
-	int *ptr;
-    int tab1[4] = {1, 12, 32, 4};
-          int tab = 1337;
-        a = ft_lstnew(f(tab));
-    int i = 0;
-    while (i<4) {
-        node = ft_lstnew(f(tab1[i]));
-        ft_lstadd_front(&a,node);
+
+    int i = 1;
+    while (i < argc)
+     {
+        node = ft_lstnew(f(ft_atoi(argv[i])));
+        ft_lstadd_back(&a,node);
         i++;
     }
+   if (argc==1)
+   {
+       printf("                     (<>|<>)\n");
+       printf("                      ( O ) ");
+
+   }
+     print_f(a);
+   
+   if (*(int *)a -> content > *(int *)a->next->content)
+            ft_sa(a);
    print_f(a);
-   print_f(b);
+   printf("a");
+   i = 0;
+   while (i < argc /2 )
+   {
+       ft_pb(&b,&a);
+       i++;
+   }
+    
+     print_f(a);
+     print_f(b);
 //    printf("\n sa ");
 //    ft_sa(b);
 //    ft_sb(a);
@@ -62,11 +64,11 @@ int main()
 //    print_f(a);
    //ft_ra_rb(&a);
    //print_f(a);
-    ft_rra_rrb(&a);
-    print_f(a);
-    ft_rra_rrb(&a);
-    print_f(a);
-    ft_rra_rrb(&a);
-    print_f(a);
+    // ft_rra_rrb(&a);
+    // print_f(a);
+    // ft_rra_rrb(&a);
+    // print_f(a);
+    // ft_rra_rrb(&a);
+    // print_f(a);
 
 }
