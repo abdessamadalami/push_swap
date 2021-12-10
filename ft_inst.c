@@ -59,12 +59,10 @@ void ft_ra_rb(t_list **a)
     node = ft_lstlast(*a);
     //printf("\ndd%d",*(int *)node->content);
     ft_lstadd_front(a, ft_lstnew(node -> content));
-     printf("\n%d", *(int *)(*a) -> content);
      list = *a;
      while ((*a) -> next -> next != NULL)
          (*a) = (*a) -> next;
      (*a) -> next = NULL;
-     printf(" %d ",*(int *)(*a) -> content);
      *a = list;
 }
 
@@ -78,4 +76,18 @@ void ft_rra_rrb(t_list **a)
     (*a) = (*a) -> next;
     free(list);
 }
- 
+
+int check_list(t_list *a)
+{
+    int index;
+
+    index = *(int *)a -> content;
+    while (a)
+    {
+        if (index > *(int *)a -> content)
+            return (0);
+        index = *(int *)a ->content;
+        a = a -> next;
+    }
+    return (1);
+}
