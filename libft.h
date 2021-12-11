@@ -18,7 +18,14 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+void ft_sa(t_list *a);
+void ft_pa(t_list **b,t_list **a);
+void ft_ra_rb(t_list **a);
+void ft_rra_rrb(t_list **a);
+void ft_pb(t_list **b,t_list **a);
+int check_list(t_list *a);
 void 	print_f(t_list *a);
+void instruction(t_list *a,int min_position,int size,t_list *b);
 int		ft_isalpha(int a);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
