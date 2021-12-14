@@ -5,11 +5,9 @@ void ft_sa(t_list *a)
 {
     int *sawp;
     sawp = a -> content;
-     printf(" %d ",*sawp);
+       printf("sa\n");
     a -> content = a -> next -> content;
     a -> next -> content = sawp;
-   
-    printf("%d",*(int *)(a -> content));
 }
 
 void ft_sb(t_list *a)
@@ -18,35 +16,40 @@ void ft_sb(t_list *a)
         return;
     int *sawp;
     sawp = a -> content;
-     printf(" %d ",*sawp);
+    printf("sa\n");
     a -> content = a -> next -> content;
     a -> next -> content = sawp;
-   
-    printf("%d",*(int *)(a -> content));
 }
 
-
-void ft_pa(t_list **a,t_list **b)
-{
- 
-     t_list *node;
-     t_list *node1;
-     node = ft_lstnew((*a) -> content);
-        node1 = *a;
-        ft_lstadd_front(b, node);
-        *a = (*a) -> next; //leks
-        free(node1);
-}
 
 void ft_pb(t_list **a,t_list **b)
 {
  
      t_list *node;
      t_list *node1;
+     if (!check_list(*a))
+     {
+         /* code */ 
+        node = ft_lstnew((*a) -> content);
+        node1 = *a;
+        ft_lstadd_front(b, node);
+        *a = (*a) -> next; //leks
+         printf("pa\n");
+        free(node1);
+     }
+}
+
+void ft_pa(t_list **a,t_list **b)
+{
+     
+     t_list *node;
+     t_list *node1;
      node = ft_lstnew((*b) -> content);
         node1 = *b;
         ft_lstadd_front(a, node);
         *b = (*b) -> next; //leks
+        printf("pa\n");
+      //  print_f(*b);
         free(node1);
 }
 
@@ -57,7 +60,7 @@ void ft_ra_rb(t_list **a)
     t_list *list;
 
     node = ft_lstlast(*a);
-    //printf("\ndd%d",*(int *)node->content);
+    printf("ra\n");
     ft_lstadd_front(a, ft_lstnew(node -> content));
      list = *a;
      while ((*a) -> next -> next != NULL)
@@ -74,7 +77,7 @@ void ft_rra_rrb(t_list **a)
     ft_lstadd_back(a, node);
     list = *a;
     (*a) = (*a) -> next;
-    free(list);
+     printf("rra\n");
 }
 
 int check_list(t_list *a)
@@ -85,7 +88,9 @@ int check_list(t_list *a)
     while (a)
     {
         if (index > *(int *)a -> content)
+        {
             return (0);
+        }
         index = *(int *)a ->content;
         a = a -> next;
     }

@@ -11,5 +11,5 @@ void print_f(t_list *a) {
       printf("( %d ) ",*(int *)ptr -> content);
       ptr = ptr->next;
    }
-   printf(" ]");
+   printf(" ]\n");
 }
