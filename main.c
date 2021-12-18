@@ -110,6 +110,7 @@ int main(int argc, char **argv)
     //   printf("sum  %d of first part \n",ft_sum(a, ((argc -1)/2))/ ((argc -1)/2));
     //    printf("moyan of the first part %d\n" ,(sum/argc)/(argc/2));
    instruction(&a, size, &b, sum);
+   print_f(b);
   nbr_in_top(&b, max_node(b, &size), ft_lstsize(b));
   int index= 0;
   while (b)

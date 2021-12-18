@@ -47,7 +47,7 @@ int pushb_in_the_p(t_list **a, t_list **b, int sum)
     int position;
     int nbr;
     int size;
-    
+
     nbr = *(int *)(*a) -> content;
     size = ft_lstsize(*b);
      position = 0;
@@ -67,8 +67,6 @@ int pushb_in_the_p(t_list **a, t_list **b, int sum)
       if (position != 1)
       {  // printf("__%d------------------------------------------------__",position);
           nbr_in_top(b, position, size);
-        
-          
       }
         ft_pb(a, b); 
       return 1;

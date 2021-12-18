@@ -159,6 +159,35 @@ void nbr_in_top(t_list **a, int min_position, int size)
    }
 }
 
+// void nbr_in_top(t_list **a, int min_position, int size)
+// {
+//     int index = 0;
+    
+//      if ((min_position <= size/2) || size - min_position == size / 2)
+//    {
+//        while (min_position > 1  )
+//        {
+//             if (min_position == 2 && (*(int *)(*ft_lstlast(*a)).content < (*(int *)(*a) -> content)))
+//                    {
+//                        ft_sa(*a);
+//                         return;
+//                    }
+//             ft_rra_rrb(a);
+//             min_position--;
+//        }
+//    }
+//    else
+//    {
+//         while ((min_position > size/2))
+//        {
+//            if (min_position > size)
+//               return;
+//             ft_ra_rb(a);
+//             min_position++;
+//        }
+//    }
+// }
+
 int	max_node(t_list *lst,int *content)
 {
     int i;
