@@ -42,15 +42,14 @@ int get_the_psition(t_list *b,int nbr,int size)
 	return (1);
 }
 
-int pushb_in_the_p(t_list **a, t_list **b, int sum)
+void pushb_in_the_p(t_list **a, t_list **b, int sum)
 {
     int position;
     int nbr;
     int size;
-    
+
     nbr = *(int *)(*a) -> content;
-    size = ft_lstsize(*b);
-     position = 0;
+    size = ft_lstsize(*b);   
     if (*b == NULL || size <= 2)
     {
         ft_pb(a, b);
@@ -59,57 +58,78 @@ int pushb_in_the_p(t_list **a, t_list **b, int sum)
             tree_int(b);
             ft_sa(*b);
         }
-        return 1;
     }  
-    else if(nbr >= sum)  // some b9b9b9b99b9b9b9b
+    else if(nbr >= sum)
     {  
+      
       position = get_the_psition(*b, nbr,size);
       if (position != 1)
-      {  // printf("__%d------------------------------------------------__",position);
           nbr_in_top(b, position, size);
-        
-          
-      }
-        ft_pb(a, b); 
-      return 1;
+          ft_pb(a, b); 
     }
-    return 0;
 }
 
-void instruction(t_list **a,int size,t_list **b,int sum)
+void instruction(t_list **a,int min_position,int size,t_list **b,int sum)
 {
-     int s = size;
-     int argc = ft_lstsize(*a);
-     int index = 0;
+    int index;
+    int content;
+
+    index = 0;
+  if (size == 3)
+  {
+      tree_int(a);
+      return;
+  }
+    int s=size;
   while (1)
    {
-       index++;
-        // print_f(*b);
-          int m = pushb_in_the_p(a, b, sum / argc);
-    //    printf("%d_-______________________________________\n",m);
-        if (*a != NULL && m == 0)
-        {
-            // printf("sum / argc _______%d_____ \n", sum/argc);
-            //  print_f(*a);
-            //  print_f(*b);
-
-             ft_ra_rb(a);
-             
-            //  print_f(*a);
-            //  print_f(*b);
-            //  printf("\n\n\n\n\n\n");
-        
-        }
-       if (index <= size)
+        pushb_in_the_p(a, b, sum);
+        if (*a != NULL)
+          ft_ra_rb(a);
+       if (size == 1 )
        {
-           if (ft_lstsize(*a) >= 1)
+          nbr_in_top(b, max_node(*b,&size), ft_lstsize(*b));
+         // print_f(*b);
+           while (s)
            {
-               instruction(a, ft_lstsize(*a), b, ft_sum(*a,ft_lstsize(*a)));
+               ft_pa(a,b);
+               s--;
            }
-            //nbr_in_top(b, max_node(*b, &size), ft_lstsize(*b));
+           break;
+       }
+       size--;
+       if (size == 1)
+       {
+        //    printf ("__________________________________________________ %d",sum);
+        //    print_f(*b);
+        //    print_f(*a);
+           size = ft_lstsize(*a);
+           s = size;
+           while (1)
+           {
+                pushb_in_the_p(a, b, sum * -1);
+                if(*a != NULL)
+                {
+                    ft_ra_rb(a);
+                }
+                if (*a == NULL)
+                {
+                    while (s)
+                    {
+                        ft_pa(a,b);
+                        s--;
+                    }
+                    nbr_in_top(a, miin_node(*a,&size), ft_lstsize(*a));
+                    break;
+                }
+                size--;
+           }
+        //    print_f(*b);
             break;  
        }
-       size--; 
+
+       index ++;
+     
    }
    
 }

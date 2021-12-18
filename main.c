@@ -18,6 +18,8 @@ void ft_ra_rb(t_list **a);
 void ft_rra_rrb(t_list **a);
 void ft_pb(t_list **b,t_list **a);
 int check_list(t_list *a);
+void tree_int(t_list **a);
+
 int *f(int a)
 {
     int *ptr;
@@ -76,6 +78,7 @@ int duplicat(t_list *a)
     return 0;
     
 }
+
 int main(int argc, char **argv)
 {
 	t_list *a;
@@ -84,33 +87,36 @@ int main(int argc, char **argv)
     int i = 1;
     int min_position;
     int size = 1;
-    
-    // int I;
-    //  int my_array[100];
-    //   for (I = 0; I < 100; I++) {
-    // my_array[I] = (rand() % 20) + 50;
-    // printf("%d ",my_array[I]);
-//}
+    int sum;
+    sum = 0;
     while (i < argc)
      {
+        sum +=ft_atoi(argv[i]);
         node = ft_lstnew(f(ft_atoi(argv[i])));
         ft_lstadd_back(&a,node);
         i++;
     }
+    
    if (duplicat(a) || argc == 1)
     {
-        write(1, "Error", 5);
+        write(1, "Error", 5);//letters
         return (0);
     }
    if (check_list(a))
         return 0;
      min_position = min_node(a, &size);
-    // printf("\n positon of the mini  %d  size of linked %d \n",min_position, size);
-    // printf("\n chec_list return :  %d  \n",check_list(a));
-    //THE MINIMAL OF NUMBERS
+     
+    //  printf("\n sum %d moiyan  %d\n",sum ,sum/(argc - 1));
+    //   printf("sum  %d of first part \n",ft_sum(a, ((argc -1)/2))/ ((argc -1)/2));
+    //    printf("moyan of the first part %d\n" ,(sum/argc)/(argc/2));
+   instruction(&a, size, &b, sum);
+  nbr_in_top(&b, max_node(b, &size), ft_lstsize(b));
+  int index= 0;
+  while (b)
+      ft_pa(&a,&b);
 
-  instruction(&a,min_position,size,&b);
-  //print_f(a);
-  //printf("\n   (%d ) ",check_list(a));
-  
+ printf("\n  (%d)",ft_lstsize(a));
+ printf("\n  (%d)",check_list(a));
+ print_f(a);
+ print_f(b);
 }

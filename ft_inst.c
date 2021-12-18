@@ -27,8 +27,6 @@ void ft_pb(t_list **a,t_list **b)
  
      t_list *node;
      t_list *node1;
-     if (!check_list(*a))
-     {
          /* code */ 
         node = ft_lstnew((*a) -> content);
         node1 = *a;
@@ -36,7 +34,7 @@ void ft_pb(t_list **a,t_list **b)
         *a = (*a) -> next; //leks
          printf("pa\n");
         free(node1);
-     }
+     
 }
 
 void ft_pa(t_list **a,t_list **b)
@@ -95,4 +93,116 @@ int check_list(t_list *a)
         a = a -> next;
     }
     return (1);
+}
+void tree_int(t_list **a)
+{
+  // printf("i M GERE");
+    int n1;
+    int n2;
+    int n3;
+    n1 = *(int *) (*a) -> content;
+    n2 = *(int *)((*a) -> next) -> content;
+    n3 = *(int *)(((*a) -> next -> next)) -> content;
+    if ((n1 > n2 && n3 < n1 && n2 > n3 ) || (n1 < n2 && n2 > n3 && n1 < n3))
+    {
+        ft_sa(*a);
+        ft_ra_rb(a);
+    }
+    else if (n1 > n2 && n1 < n3)
+        ft_sa(*a);
+    else if (n1 > n2 && n1 > n3)
+        ft_rra_rrb(a);
+    else if (n1 < n2 && n2 > n3 && n2 > n3)
+            ft_ra_rb(a);
+    else if (n1 < n2 && n2 > n3)
+        {
+            ft_ra_rb(a);
+            ft_sa(*a);
+        }
+}
+
+void nbr_in_top(t_list **a, int min_position, int size)
+{
+    int index = 0;
+  //  printf("{%d}\n",min_position);
+    if (size == min_position && min_position != 1)
+        ft_ra_rb(a);
+    
+    else if ((min_position <= size/2) || size - min_position == size / 2)
+   {
+       while (min_position >= 1  )
+       {
+          // print_f(*a);
+           if (min_position == 2)
+           {
+               ft_rra_rrb(a);
+                break;
+            }
+            ft_rra_rrb(a);
+            min_position--;
+       }
+   }
+   else
+   {
+        while ((min_position > size/2) && min_position != 1)
+       {
+           if (min_position > size)
+           {
+             // print_f(*a); 
+              return;
+           }
+            ft_ra_rb(a);
+        //    printf("{{{{{{{{ *b  nbr = %d  %d }}}}}}}} \n", min_position,size);
+        //    print_f(*a);
+            min_position++;
+       }
+   }
+}
+
+int	max_node(t_list *lst,int *content)
+{
+    int i;
+    int index;
+    int a;
+    int position;
+    position = 1;
+    index = 1;
+    i = *(int *)lst -> content;
+	while (lst)
+	{
+        a = *(int *)lst -> content;
+        if (a > i)
+        {
+            i = a;
+            position = index;
+        }
+        lst = lst -> next;
+        index++;
+	}
+    *content = i;
+	return (position);
+}
+
+int	miin_node(t_list *lst,int *content)
+{
+    int i;
+    int index;
+    int a;
+    int position;
+    position = 1;
+    index = 1;
+    i = *(int *)lst -> content;
+	while (lst)
+	{
+        a = *(int *)lst -> content;
+        if (a < i)
+        {
+            i = a;
+            position = index;
+        }
+        lst = lst -> next;
+        index++;
+	}
+    *content = i;
+	return (position);
 }
