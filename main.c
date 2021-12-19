@@ -12,13 +12,13 @@
 #include "libft.h"
 #include <stdio.h>
 #include<unistd.h>
-void ft_sa(t_list *a);
-void ft_pa(t_list **b,t_list **a);
-void ft_ra_rb(t_list **a);
-void ft_rra_rrb(t_list **a);
-void ft_pb(t_list **b,t_list **a);
-int check_list(t_list *a);
-void tree_int(t_list **a);
+// void ft_sa(t_list *a);
+// void ft_pa(t_list **b,t_list **a);
+// void ft_ra_rb(t_list **a);
+// void ft_rra_rrb(t_list **a);
+// void ft_pb(t_list **b,t_list **a);
+// int check_list(t_list *a);
+
 
 int *f(int a)
 {
@@ -78,12 +78,12 @@ int duplicat(t_list *a)
     return 0;
     
 }
-
 int main(int argc, char **argv)
 {
 	t_list *a;
     t_list *b;
 	t_list *node;
+    t_list *inst;
     int i = 1;
     int min_position;
     int size = 1;
@@ -96,7 +96,6 @@ int main(int argc, char **argv)
         ft_lstadd_back(&a,node);
         i++;
     }
-    
    if (duplicat(a) || argc == 1)
     {
         write(1, "Error", 5);//letters
@@ -105,19 +104,16 @@ int main(int argc, char **argv)
    if (check_list(a))
         return 0;
      min_position = min_node(a, &size);
-     
-    //  printf("\n sum %d moiyan  %d\n",sum ,sum/(argc - 1));
-    //   printf("sum  %d of first part \n",ft_sum(a, ((argc -1)/2))/ ((argc -1)/2));
-    //    printf("moyan of the first part %d\n" ,(sum/argc)/(argc/2));
-   instruction(&a, size, &b, sum);
-   print_f(b);
-  nbr_in_top(&b, max_node(b, &size), ft_lstsize(b));
+    
+  instruction(&a, size, &b, sum,&inst);
+   
+ nbr_in_top(&b, max_node(b, &size), ft_lstsize(b),'b',&inst);
   int index= 0;
   while (b)
-      ft_pa(&a,&b);
-
- printf("\n  (%d)",ft_lstsize(a));
+      ft_p(&a,&b,'a',&inst);
+  //print_f_str(inst);
+  printf("\n  (%d)",ft_lstsize(a));
  printf("\n  (%d)",check_list(a));
  print_f(a);
- print_f(b);
+
 }
