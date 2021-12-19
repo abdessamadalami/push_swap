@@ -104,10 +104,7 @@ void instruction(t_list **a,int size,t_list **b,int sum,t_list **inst)
              return;
         if (((*a) -> next) != NULL && m == 0)
               {
-                      print_f(*a);
-                      ft_ra_rb(a, 'a', inst);
-                     print_f(*a);
-                     return ;
+                      ft_ra_rb(a, 'a', inst);// this is rra not ra 
               }
        if (index <= size && ft_lstsize(*a) != 0)
        {

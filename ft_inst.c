@@ -78,13 +78,13 @@ void ft_ra_rb(t_list **a,char c, t_list **inst)
      *a = list;
      if (c == 'a')
      {
-        write(1,"ra\n",4);
-         ft_lstadd_back(inst,ft_lstnew(ft_strdup("ra")));
+        write(1,"rra\n",4);
+         ft_lstadd_back(inst,ft_lstnew(ft_strdup("rra")));
      }
      else
      {
-         write(1,"rb\n",4);
-         ft_lstadd_back(inst,ft_lstnew(ft_strdup("rb")));
+         write(1,"rrb\n",4);
+         ft_lstadd_back(inst,ft_lstnew(ft_strdup("rrb")));
      }
      
 }
@@ -99,13 +99,13 @@ void ft_rra_rrb(t_list **a, char c,t_list **inst)
     (*a) = (*a) -> next;
      if(c == 'a')
      {
-         write(1,"rra\n",5);
-         ft_lstadd_back(inst,ft_lstnew(ft_strdup("rra")));
+         write(1,"ra\n",4);
+         ft_lstadd_back(inst,ft_lstnew(ft_strdup("ra")));
      }
      else
      {
-        write(1,"rrb\n",5);
-         ft_lstadd_back(inst,ft_lstnew(ft_strdup("rrb")));
+        write(1,"rb\n",4);
+         ft_lstadd_back(inst,ft_lstnew(ft_strdup("rb")));
      }
 }
 
