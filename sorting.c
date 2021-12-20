@@ -73,21 +73,6 @@ int pushb_in_the_p(t_list **a, t_list **b, int sum,t_list **inst)
     }
     return 0;
 }
-int ft_get_the_instraction(t_list **a, int sum )
-{
-     int nbr1;
-      int nbr2;
-      t_list *node;
-      node = ft_lstlast(*a);
-    if(ft_lstsize(*a) >= 3)
-    {
-            nbr1 = *(int *)((*a) ->next)-> content;
-            nbr2 = *(int *)node -> content;
-      if (nbr2 < sum)
-             return 1;//1:rra             
-    }
-   return 0; 
-}
 
 void instruction(t_list **a,int size,t_list **b,int sum,t_list **inst)
 {
@@ -116,5 +101,4 @@ void instruction(t_list **a,int size,t_list **b,int sum,t_list **inst)
        }
        size--; 
    }
-   
 }

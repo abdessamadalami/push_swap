@@ -14,6 +14,7 @@ void print_f(t_list *a) {
    }
    printf(" ]\n");
 }
+
 int ft_sum(t_list *a, int nbr)
 {
     int sum;
@@ -30,6 +31,7 @@ int ft_sum(t_list *a, int nbr)
    return (sum);
 
 }
+
 void print_f_str(t_list *a) {
 
    t_list *ptr = a;

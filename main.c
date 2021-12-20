@@ -104,16 +104,17 @@ int main(int argc, char **argv)
    if (check_list(a))
         return 0;
      min_position = min_node(a, &size);
-    
   instruction(&a, size, &b, sum,&inst);
-   
- nbr_in_top(&b, max_node(b, &size), ft_lstsize(b),'b',&inst);
-  int index= 0;
-  while (b)
-      ft_p(&a,&b,'a',&inst);
-  //print_f_str(inst);
-  printf("\n  (%d)",ft_lstsize(a));
+ while (b)
+ {
+ if (max_node(b,&size) > 1)
+    {
+       nbr_in_top(&b, max_node(b, &size), ft_lstsize(b), 'b', &inst);
+    }
+     ft_p(&a,&b,'a',&inst);
+ }
  printf("\n  (%d)",check_list(a));
- print_f(a);
+  print_f(a);
+  printf("\n  (%d)",ft_lstsize(a));
 
 }
