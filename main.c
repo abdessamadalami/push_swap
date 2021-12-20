@@ -78,6 +78,30 @@ int duplicat(t_list *a)
     return 0;
     
 }
+void pro_link(t_list **a,t_list **b,t_list **inst)
+{
+    int m;
+    int content;
+    int index = ft_lstsize(*a);
+    
+    m = ft_sum(*a, ft_lstsize(*a)) / ft_lstsize(*a);
+    if (ft_lstsize(*a) > 100)
+    {
+         
+        while(index)
+        {
+            //printf("\n %d ",*(int *) (*a) -> content);
+            if (*(int *) (*a) -> content >= m)
+            {
+               // printf("\n %d ",*(int *) (*a) -> content);
+                ft_p(a, b,'b',inst);
+            }
+                 if (*(int *) (*a) -> content < m )
+                    ft_rra_rrb(a, 'a', inst);
+            index--;
+        }
+    }
+}
 int main(int argc, char **argv)
 {
 	t_list *a;
@@ -104,7 +128,10 @@ int main(int argc, char **argv)
    if (check_list(a))
         return 0;
      min_position = min_node(a, &size);
-  instruction(&a, size, &b, sum,&inst);
+     pro_link(&a,&b,&inst);
+    while (b)
+     ft_p(&a,&b,'a',&inst);
+   instruction(&a, size, &b, sum,&inst);
  while (b)
  {
  if (max_node(b,&size) > 1)

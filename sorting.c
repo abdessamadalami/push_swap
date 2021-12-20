@@ -91,14 +91,15 @@ void instruction(t_list **a,int size,t_list **b,int sum,t_list **inst)
               {
                       ft_ra_rb(a, 'a', inst);// this is rra not ra 
               }
-       if (index <= size && ft_lstsize(*a) != 0)
+       else if (ft_lstsize(*a) != 0)
        {
-           if (ft_lstsize(*a) >= 1 )
+           if (ft_lstsize(*a) >= 1)
            {
                 instruction(a, ft_lstsize(*a), b, ft_sum(*a, ft_lstsize(*a)),inst);
            }
             break;  
        }
+       index++;
        size--; 
    }
 }

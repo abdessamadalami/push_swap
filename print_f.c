@@ -21,13 +21,16 @@ int ft_sum(t_list *a, int nbr)
     t_list *ptr;
 
     sum = 0;
+    int index = 0;
     ptr = a;
    while(nbr)
    {
-     sum += *(int *)ptr -> content;
+      sum += *(int *)ptr -> content;
       ptr = ptr->next;
       nbr--;
+      index++;
    }
+  
    return (sum);
 
 }
