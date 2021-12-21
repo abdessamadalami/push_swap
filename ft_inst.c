@@ -88,7 +88,7 @@ void ft_ra_rb(t_list **a,char c, t_list **inst)
      }
      
 }
-
+//void ft_rra_rrb(t_list **a, char c,t_list **inst)
 void ft_rra_rrb(t_list **a, char c,t_list **inst)
 {
     t_list *node;
@@ -99,7 +99,7 @@ void ft_rra_rrb(t_list **a, char c,t_list **inst)
     (*a) = (*a) -> next;
      if(c == 'a')
      {
-         write(1,"ra\n",4);
+         write(1,"ra\n",3);
          ft_lstadd_back(inst,ft_lstnew(ft_strdup("ra")));
      }
      else
@@ -188,7 +188,29 @@ void nbr_in_top(t_list **a, int min_position, int size , char c,t_list **inst)
    }
 }
 
-
+int	miin_node(t_list *lst,int *content)
+{
+    int i;
+    int index;
+    int a;
+    int position;
+    position = 1;
+    index = 1;
+    i = *(int *)lst -> content;
+	while (lst)
+	{
+        a = *(int *)lst -> content;
+        if (a < i)
+        {
+            i = a;
+            position = index;
+        }
+        lst = lst -> next;
+        index++;
+	}
+    *content = i;
+	return (position);
+}
 
 int	max_node(t_list *lst,int *content)
 {
@@ -214,26 +236,3 @@ int	max_node(t_list *lst,int *content)
 	return (position);
 }
 
-int	miin_node(t_list *lst,int *content)
-{
-    int i;
-    int index;
-    int a;
-    int position;
-    position = 1;
-    index = 1;
-    i = *(int *)lst -> content;
-	while (lst)
-	{
-        a = *(int *)lst -> content;
-        if (a < i)
-        {
-            i = a;
-            position = index;
-        }
-        lst = lst -> next;
-        index++;
-	}
-    *content = i;
-	return (position);
-}

@@ -18,6 +18,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+void sort_list(t_list **a, t_list **b, t_list **inst);
 int ft_sum(t_list *a,int nbr);
 void ft_s(t_list *a, char c,t_list **inst);
 int miin_node(t_list *lst,int *content);

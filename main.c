@@ -78,30 +78,48 @@ int duplicat(t_list *a)
     return 0;
     
 }
+
+int ft_sum_t(t_list *a, int nbr)
+{
+    int sum;
+    t_list *ptr;
+
+    sum = 0;
+    int index = 0;
+    ptr = a;
+   while(nbr)
+   {
+      sum += *(int *)ptr -> content;
+      ptr = ptr->next;
+      nbr--;
+      index++;
+   }
+  
+   return (sum);
+
+}
+
 void pro_link(t_list **a,t_list **b,t_list **inst)
 {
     int m;
-    int content;
+    int content,content1;
     int index = ft_lstsize(*a);
-    
-    m = ft_sum(*a, ft_lstsize(*a)) / ft_lstsize(*a);
-    if (ft_lstsize(*a) > 100)
-    {
-         
-        while(index)
-        {
-            //printf("\n %d ",*(int *) (*a) -> content);
-            if (*(int *) (*a) -> content >= m)
+    max_node(*a, &content);
+    miin_node(*a, &content1);
+    m = (content + content1)/2;
+             if((*a) -> next == NULL)
+                return;
+            if(*(int *) (*a) -> content <= m)
             {
-               // printf("\n %d ",*(int *) (*a) -> content);
                 ft_p(a, b,'b',inst);
             }
-                 if (*(int *) (*a) -> content < m )
-                    ft_rra_rrb(a, 'a', inst);
-            index--;
-        }
-    }
+            if (*(int *) (*a) -> content > m )
+            {
+                ft_rra_rrb(a, 'a', inst);
+                pro_link(a, b, inst);
+            } 
 }
+
 int main(int argc, char **argv)
 {
 	t_list *a;
@@ -127,20 +145,19 @@ int main(int argc, char **argv)
     }
    if (check_list(a))
         return 0;
-     min_position = min_node(a, &size);
-     pro_link(&a,&b,&inst);
-    while (b)
-     ft_p(&a,&b,'a',&inst);
-   instruction(&a, size, &b, sum,&inst);
+   if (argc < 10)
+   sort_list(&a, &b,&inst);
+    else
+        instruction(&a, size, &b, sum,&inst);
  while (b)
  {
- if (max_node(b,&size) > 1)
+  if (max_node(b,&size) > 1)
     {
        nbr_in_top(&b, max_node(b, &size), ft_lstsize(b), 'b', &inst);
     }
      ft_p(&a,&b,'a',&inst);
  }
- printf("\n  (%d)",check_list(a));
+  printf("\n  (%d)",check_list(a));
   print_f(a);
   printf("\n  (%d)",ft_lstsize(a));
 

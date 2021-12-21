@@ -9,7 +9,7 @@ void print_f(t_list *a) {
    //start from the beginning
    while(ptr)
    {
-      printf("( %d ) ",*(int *)ptr -> content);
+      printf(" %d ",*(int *)ptr -> content);
       ptr = ptr->next;
    }
    printf(" ]\n");
@@ -17,22 +17,29 @@ void print_f(t_list *a) {
 
 int ft_sum(t_list *a, int nbr)
 {
-    int sum;
-    t_list *ptr;
+    int sum ,size;
+     int sum_half = 0;
+     int argc = 0;
 
     sum = 0;
-    int index = 0;
-    ptr = a;
+    size = nbr;
+    argc = ft_lstsize(a);
    while(nbr)
    {
-      sum += *(int *)ptr -> content;
-      ptr = ptr->next;
+      if (nbr < 100)
+      {
+         sum_half += *(int *)a -> content;
+      }
+      sum += *(int *)a -> content;
+      a = a->next;
       nbr--;
-      index++;
-   }
-  
-   return (sum);
 
+   }
+   if (size > 100)
+   {
+      return sum_half;
+   }
+   return (sum);
 }
 
 void print_f_str(t_list *a) {
