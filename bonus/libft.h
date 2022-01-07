@@ -18,21 +18,20 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-void sort_list(t_list **a, t_list **b, t_list **inst);
-int ft_sum(t_list *a,int nbr);
-void ft_s(t_list *a, char c,t_list **inst);
-int miin_node(t_list *lst,int *content);
-int	max_node(t_list *lst,int *content);
-void ft_ra_rb(t_list **a, char c,t_list **inst);
-void ft_rra_rrb(t_list **a, char c, t_list **inst);
-void ft_p(t_list **a,t_list **b,char c, t_list **inst);
-int check_list(t_list *a);
+void	nbr_in_top_of_two(t_list **a, t_list **b, int pa , int pb , t_list **inst);
+int		buble_list(t_list *a) ;
+int		get_the_psition(t_list *b,int nbr,int size);
+void	ft_s(t_list **a, char c,t_list **inst);
+int		max_node(t_list *lst,int *content);
+int		min_node(t_list *lst,int *size);
+void	ft_ra_rb(t_list **a, char c,t_list **inst); // rra
+void	ft_rra_rrb(t_list **a, char c, t_list **inst); // ra
+void	ft_p(t_list **a,t_list **b,char c, t_list **inst);
+int		check_list(t_list *a);
 void 	print_f(t_list *a);
-void tree_int(t_list **a,char c, t_list **inst);
-void instruction(t_list **a,int size,t_list **b,int sum,t_list **inst);
-int	min_node(t_list *lst,int *size);
-void nbr_in_top(t_list **a, int min_position, int size, char c,t_list **inst);
-void print_f_str(t_list *a);
+void	tree_int(t_list **a,char c, t_list **inst);
+void	print_f_str(t_list *list);
+
 int		ft_isalpha(int a);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

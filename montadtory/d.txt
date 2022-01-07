@@ -1,0 +1,135 @@
+#include "libft.h"
+#include <stdio.h>
+
+int get_the_psition(t_list *b,int nbr,int size)
+{
+    int i;
+    int n1;
+    int n2;
+    int index;
+    int max_content;
+    int min_content;
+
+    i = 1;
+    index = 1;
+    int min_position = miin_node(b, &min_content);
+    int max_position = max_node(b, &max_content);
+     if (nbr < min_content && nbr < max_content)
+         return min_position +1 ;
+     else if (nbr > max_content && nbr > max_content)
+     {
+         return max_position;
+     }
+     else
+     {
+            while (size-1)
+            {
+                n1 = *(int *)b -> content;
+                n2 = *(int *)(b -> next) -> content;
+                if ((n1 < nbr && n2 > nbr) && (n1 != min_content))
+                {
+                    return i + 1;
+                }
+                if (n1 > nbr && n2 < nbr )
+                {
+                    return i+1;
+                }
+                b = b -> next;
+                i++;
+                size--;
+            }
+     }
+	return (1);
+}
+
+void pushb_in_the_p(t_list **a, t_list **b, int sum)
+{
+    int position;
+    int nbr;
+    int size;
+
+    nbr = *(int *)(*a) -> content;
+    size = ft_lstsize(*b);   
+    if (*b == NULL || size <= 2)
+    {
+        ft_pb(a, b);
+        if (size == 2)
+        {
+            tree_int(b);
+            ft_sa(*b);
+        }
+    }  
+    else if(nbr >= sum)
+    {  
+      
+      position = get_the_psition(*b, nbr,size);
+      if (position != 1)
+          nbr_in_top(b, position, size);
+          ft_pb(a, b); 
+    }
+}
+
+void instruction(t_list **a,int min_position,int size,t_list **b,int sum)
+{
+    int index;
+    int content;
+
+    index = 0;
+  if (size == 3)
+  {
+      tree_int(a);
+      return;
+  }
+    int s=size;
+  while (1)
+   {
+        pushb_in_the_p(a, b, sum);
+        if (*a != NULL)
+          ft_ra_rb(a);
+       if (size == 1 )
+       {
+          nbr_in_top(b, max_node(*b,&size), ft_lstsize(*b));
+         // print_f(*b);
+           while (s)
+           {
+               ft_pa(a,b);
+               s--;
+           }
+           break;
+       }
+       size--;
+       if (size == 1)
+       {
+        //    printf ("__________________________________________________ %d",sum);
+        //    print_f(*b);
+        //    print_f(*a);
+           size = ft_lstsize(*a);
+           s = size;
+           while (1)
+           {
+                pushb_in_the_p(a, b, sum * -1);
+                if(*a != NULL)
+                {
+                    ft_ra_rb(a);
+                }
+                if (*a == NULL)
+                {
+                    while (s)
+                    {
+                        ft_pa(a,b);
+                        s--;
+                    }
+                    nbr_in_top(a, miin_node(*a,&size), ft_lstsize(*a));
+                    break;
+                }
+                size--;
+           }
+        //    print_f(*b);
+            break;  
+       }
+
+       index ++;
+     
+   }
+   
+}
