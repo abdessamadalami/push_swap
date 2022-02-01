@@ -21,12 +21,12 @@ typedef struct s_list
 void	nbr_in_top_of_two(t_list **a, t_list **b, int pa , int pb , t_list **inst);
 int		buble_list(t_list *a) ;
 int		get_the_psition(t_list *b,int nbr,int size);
-void	ft_s(t_list **a, char c,t_list **inst);
+void	ft_s(t_list **a);
 int		max_node(t_list *lst,int *content);
 int		min_node(t_list *lst,int *size);
-void	ft_ra_rb(t_list **a, char c,t_list **inst); // rra
-void	ft_rra_rrb(t_list **a, char c, t_list **inst); // ra
-void	ft_p(t_list **a,t_list **b,char c, t_list **inst);
+void	ft_ra_rb(t_list **a); // rra
+void	ft_rra_rrb(t_list **a); // ra
+void	ft_p(t_list **a,t_list **b,char c);
 int		check_list(t_list *a);
 void 	print_f(t_list *a);
 void	tree_int(t_list **a,char c, t_list **inst);

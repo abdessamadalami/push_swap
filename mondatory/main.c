@@ -49,6 +49,7 @@ int duplicat(t_list *a)
     }
     return 0;
 }
+// this fun return 0 or index of it (numbre) 
 
 int check_nbr_list(t_list *a , int nbr,int *cont)
 {
@@ -72,23 +73,21 @@ int check_nbr_list(t_list *a , int nbr,int *cont)
 
 void pro_link(t_list **a, t_list **b, t_list **inst, int t)
 {
-    int m;
+    int med;
     int cont;
     int position;
     int position_b;
     
     position_b = 0;
-    m =  buble_list(*a);
+    med =  buble_list(*a);
     while(1)
     {
-        position = check_nbr_list (*a, m, &cont);
-        if((*a) -> next == NULL)
-            return;
-        if (position == 0)
+        position = check_nbr_list (*a, med, &cont);
+        if((*a) -> next == NULL || position == 0)
             return;
         if (*b != NULL && t == 1)
-            position_b = get_the_psition(*b,cont,ft_lstsize(*b));
-         nbr_in_top_of_two(a, b, position, position_b, inst);
+            position_b = get_the_psition(*b, cont, ft_lstsize(*b)); // for get the position of rigth nbr in b 
+         nbr_in_top_of_two(a, b, position, position_b, inst); // move a and b in the same time for get rr or rrr or ss 
          ft_p(a, b,'b',inst);
     }
 }
@@ -136,7 +135,7 @@ int buble_list(t_list *a)
     countSwaps(i, arr);
     if (i > 100)
         k = 8;
-    return (arr[i / (k)]);  
+    return (arr[i / (k)]); 
 }
 
 int check_argv(char *argv)
@@ -193,19 +192,19 @@ int main(int argc, char **argv)
    while (ft_lstsize(a) > 3)
         pro_link(&a, &b, &inst, 1);
     if (ft_lstsize(a) == 2 && check_list(a) != 1)
-         ft_s(a,'a',&inst);
+        ft_s(a,'a',&inst);
    else if (check_list(a) != 1)
-          tree_int(&a,'a',&inst);
+        tree_int(&a,'a',&inst);
    while(b)
    {
      nbr_in_top_of_two(&a, &b, 0, max_node(b, &t) ,&inst);
      ft_p(&a, &b, 'a',&inst);
    }
-    printf("%d \n",check_list(a) );
-    print_f(a);
+    //printf("%d \n",check_list(a));
+    //print_f(a);
     print_f_str(inst);
     ft_lstclear(&a, del);
     ft_lstclear(&b, del);
     ft_lstclear(&inst, del);
-    system("leaks a.out");
+    //system("leaks a.out");
 }

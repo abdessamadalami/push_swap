@@ -9,20 +9,20 @@
 #    Updated: 2021/11/17 10:58:30 by ael-oual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SRC = ft_atoi.c    ft_isalpha.c ft_memchr.c  ft_memset.c  ft_strlcat.c ft_strnstr.c ft_bzero.c   ft_isascii.c ft_memcmp.c  ft_strchr.c  ft_strlcpy.c ft_strrchr.c ft_calloc.c  ft_isdigit.c ft_memcpy.c  ft_strdup.c  ft_strlen.c  ft_substr.c ft_isalnum.c ft_isprint.c ft_memmove.c ft_strncmp.c ft_tolower.c ft_toupper.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_split.c 
-BS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+SRC = mondatory/ft_inst.c mondatory/main.c mondatory/print_f.c mondatory/sorting.c
+BS = bonus/ft_inst.c bonus/main_b.c bonus/print_f.c
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libft.a
-OBJ = $(SRC:.c=.o)
-OBJB = $(BS:.c=.o)
-all: $(NAME)
+all: lib
+	$(CC) $(CFLAGS) $(SRC) libft/libft.a -o push_swap 
+lib:
+	 cd libft && make all && make bonus
 $(NAME): $(OBJ)
 	ar -rc $(NAME) $(OBJ)
-bonus: $(OBJB)
-	ar -rc $(NAME) $(OBJB)
+bonus: lib
+	$(CC) $(CFLAGS) $(BS) libft/libft.a -o checker
 clean: 
-	rm -f $(OBJ) $(OBJB)
+	cd libft && make clean
 fclean:clean
-	rm -f libft.a 
-re:fclean all bonus
+	cd libft && make fclean
+re:fclean ; all bonus

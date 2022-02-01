@@ -8,9 +8,8 @@ int position_content(t_list *list, int nbr ,int *min_content,int *max_content)
 
       min_position = min_node(list, min_content);
       max_position = max_node(list, max_content);
-        //printf(" min content %d \n", *min_content);
      if (nbr < *min_content && nbr < *max_content)
-         return min_position + 1 ;
+         return min_position + 1; // why plus one ? 
      else if (nbr > *max_content && nbr > *max_content)
          return max_position;
     return (0);
@@ -34,7 +33,7 @@ int get_the_psition(t_list *b,int nbr,int size)
         if ((n1 < nbr && n2 > nbr) && (n1 != min_content))
             return i + 1;
         if (n1 > nbr && n2 < nbr )
-            return i+1;
+            return i + 1;
         b = b -> next;
         i++;
         size--;

@@ -1,8 +1,9 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
- #include <unistd.h>
- #include "libft.h"
+#include <unistd.h>
+#include "libft.h"
+
 int *f(int a)
 {
     int *ptr;
@@ -53,48 +54,44 @@ int check_argv(char *argv)
      }
      return 1;
 }
-void char_instruction(t_list **a, t_list **b ,t_list **inst, char c, void (f_inst)(t_list** ,char,t_list **))
+
+void char_instruction(t_list **a, t_list **b , char c, void (f_inst)(t_list**))
 {
-  
     if(c == 'r' || c == 's')
     {
-        f_inst(a,'a', inst);
-        f_inst(b,'b', inst);
+        f_inst(a);
+        f_inst(b);
     }
     else if (c == 'a')
-        f_inst(a,c,inst);
+        f_inst(a);
     else if (c == 'b')
-        f_inst(b,c,inst);
+        f_inst(b);
+    else
+    {
+        write(1, "Error", 5);
+        exit(0);
+    }
 }
-char give_me_instruction(char *instruction)
-{
-    char tab[];
-    tab[] = "pa\npb\nsa\nsb\nss\nra\nrb\nrr\nrra\nrrb\nrrr\n";
-}
-void pprr(t_list **a ,t_list **b, t_list **inst,char *instruction)
-{
 
-
+void instructions_fun(t_list **a ,t_list **b, char *instruction)
+{
+   
+        //printf("%s",instruction);
         if (instruction[0] == 's' && instruction[2] == '\n')
-        {
-            printf("____");
-            char_instruction(a,b, inst,instruction[1] , ft_s);// not the same
-        }
-        else if (instruction[0] == 'r' && instruction[1] == 'r' && ( instruction[2] == 'r'|| instruction[2] == 'a' || instruction[2]== 'b'))
-            char_instruction(a, b, inst,instruction[2] , ft_ra_rb);
+            char_instruction(a,b,instruction[1] , ft_s); // not the same
         else if (instruction[0] == 'r' && instruction[2] == '\n')
-            char_instruction(a,b, inst,instruction[1] , ft_rra_rrb);
-        else if (instruction[0] == 'p' && instruction[2] == '\n')
-        {
-            printf("rrrrrrrrrrrrr");
-            ft_p(a, b ,instruction[1], inst);
-        }
+            char_instruction(a,b,instruction[1] , ft_rra_rrb);
+        else if (instruction[0] == 'r' && instruction[1] == 'r')
+            char_instruction(a, b,instruction[2] , ft_ra_rb);
+        else if (instruction[0] == 'p' && instruction[2] == '\n' && (instruction[1] == 'a' || instruction[1] == 'b'))
+            ft_p(a, b ,instruction[1]);
         else
-        {
-            printf("Unknown instruction _%c_\n",instruction[1]);
-            exit(0);
-        }
+            {
+                write(1, "Error", 5);
+                exit(0);
+            }
 }
+
 t_list *check_and_make(int argc ,char **argv)
 {
     t_list  *a;
@@ -122,43 +119,33 @@ t_list *check_and_make(int argc ,char **argv)
     }
     return (a);
 }
-int main(int argc, char **argv){
 
-  char instruction;
-  int k;
-  
-
+int main(int argc, char **argv)
+{
     t_list  *a;
     t_list  *b;
-    t_list  *inst;
-    int i;
-    char tab[4];
+    int     k;
+    int     i;
+    char    tab[4];
   
-    inst = 0;
     i = 0;
     a = check_and_make(argc ,argv);
-    k = 2;
+    k = 1;
     while (k != 0) 
-    {
-        k = read(0, &instruction, 1);
-             tab[i] = (instruction);
-        if ((instruction) == '\n' && i != 0)
+    { 
+        k = read(0, &tab[i], 1);
+        if (tab[i] == '\n' && i != 0 && k != 0) 
         {
             tab[i + 1] = '\0';
-            pprr(&a , &b, &inst,tab);
+            instructions_fun(&a, &b, tab);
             i = -1;
         }
         i++;
     }
-    print_f(a);
-    print_f(b);
-    print_f_str(inst);
     if (check_list(a) == 1 && b == 0)
         write(1, "OK\n",3);
     else
         write(1, "KO\n",3);
-       ft_lstclear(&a, del);
-    //  ft_lstclear(&b, del);
-    //  ft_lstclear(&inst, del);0
-    // system("leaks mix");
+    ft_lstclear(&a, del);
+   //  system("leaks mix");
 }
