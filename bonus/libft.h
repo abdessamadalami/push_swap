@@ -3,35 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-oual <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:07:22 by ael-oual          #+#    #+#             */
-/*   Updated: 2021/11/18 19:18:57 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:26:57 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
-#include <unistd.h>
+# include <unistd.h>
+
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-void	nbr_in_top_of_two(t_list **a, t_list **b, int pa , int pb , t_list **inst);
-int		buble_list(t_list *a) ;
-int		get_the_psition(t_list *b,int nbr,int size);
+int		buble_list(t_list *a);
+int		get_the_psition(t_list *b, int nbr, int size);
 void	ft_s(t_list **a);
-int		max_node(t_list *lst,int *content);
-int		min_node(t_list *lst,int *size);
+int		max_node(t_list *lst, int *content);
+int		min_node(t_list *lst, int *size);
 void	ft_ra_rb(t_list **a); // rra
 void	ft_rra_rrb(t_list **a); // ra
-void	ft_p(t_list **a,t_list **b,char c);
+void	ft_p(t_list **a, t_list **b, char c);
 int		check_list(t_list *a);
-void 	print_f(t_list *a);
-void	tree_int(t_list **a,char c, t_list **inst);
+void	print_f(t_list *a);
+void	tree_int(t_list **a, char c, t_list **inst);
 void	print_f_str(t_list *list);
-
+t_list	*check_and_make(int argc, char **argv);
+int		duplicat(t_list *a);
+int		check_argv(char *argv);
+void	del(void *ptr);
 int		ft_isalpha(int a);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

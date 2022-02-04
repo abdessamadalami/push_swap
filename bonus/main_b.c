@@ -1,151 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_b.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/02 14:08:56 by ael-oual          #+#    #+#             */
+/*   Updated: 2022/02/03 08:12:42 by ael-oual         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft.h"
 
-int *f(int a)
+void	error_fun(void)
 {
-    int *ptr;
-
-	ptr = malloc(4);
-	*ptr = a;
-	return ptr;
+	write(1, "Error\n", 6);
+	exit(0);
 }
 
-void del(void *ptr)
+void	char_instruction(t_list **a, t_list **b,
+char c, void (f_inst)(t_list**))
 {
-	 free(ptr);
+	if (c == 'r' || c == 's')
+	{
+		f_inst(a);
+		f_inst(b);
+	}
+	else if (c == 'a')
+		f_inst(a);
+	else if (c == 'b')
+		f_inst(b);
+	else
+		error_fun();
 }
 
-int duplicat(t_list *a)
+void	instructions_fun(t_list **a, t_list **b, char *instruction)
 {
-    int nbr;
-    t_list *list;
-
-    nbr = 0;
-    while (a)
-    {
-       nbr = *(int *)a -> content;
-       list = a -> next;
-        while (list)
-        {
-            if (*(int *)list ->content == nbr)
-            {
-                return 1;
-            }
-            list = list -> next;
-        }
-        a = a->next;
-    }
-    return 0;
+	if (instruction[0] == 's' && instruction[2] == '\n')
+		char_instruction(a, b, instruction[1], ft_s);
+	else if (instruction[0] == 'r' && instruction[2] == '\n')
+		char_instruction(a, b, instruction[1], ft_rra_rrb);
+	else if (instruction[0] == 'r' && instruction[1] == 'r')
+		char_instruction(a, b, instruction[2], ft_ra_rb);
+	else if (instruction[0] == 'p' && instruction[2] == '\n'
+		&& (instruction[1] == 'a' || instruction[1] == 'b'))
+		ft_p(a, b, instruction[1]);
+	else
+		error_fun();
 }
 
-int check_argv(char *argv)
+void	result_function(int n, t_list *b)
 {
-     int index;
-
-     index = 0;
-     while (argv[index] != '\0')
-     {
-         if(ft_isdigit(argv[index]) == 0 && argv[index] != '-')
-                return 0;
-         index ++;
-     }
-     return 1;
+	if (n == 1 && b == 0)
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }
 
-void char_instruction(t_list **a, t_list **b , char c, void (f_inst)(t_list**))
+int	main(int argc, char **argv)
 {
-    if(c == 'r' || c == 's')
-    {
-        f_inst(a);
-        f_inst(b);
-    }
-    else if (c == 'a')
-        f_inst(a);
-    else if (c == 'b')
-        f_inst(b);
-    else
-    {
-        write(1, "Error", 5);
-        exit(0);
-    }
-}
+	t_list	*a;
+	t_list	*b;
+	int		k;
+	int		i;
+	char	tab[4];
 
-void instructions_fun(t_list **a ,t_list **b, char *instruction)
-{
-   
-        //printf("%s",instruction);
-        if (instruction[0] == 's' && instruction[2] == '\n')
-            char_instruction(a,b,instruction[1] , ft_s); // not the same
-        else if (instruction[0] == 'r' && instruction[2] == '\n')
-            char_instruction(a,b,instruction[1] , ft_rra_rrb);
-        else if (instruction[0] == 'r' && instruction[1] == 'r')
-            char_instruction(a, b,instruction[2] , ft_ra_rb);
-        else if (instruction[0] == 'p' && instruction[2] == '\n' && (instruction[1] == 'a' || instruction[1] == 'b'))
-            ft_p(a, b ,instruction[1]);
-        else
-            {
-                write(1, "Error", 5);
-                exit(0);
-            }
-}
-
-t_list *check_and_make(int argc ,char **argv)
-{
-    t_list  *a;
-	t_list  *node;
-    int     i;
-
-    i = 1;
-    a = 0;
-    while (i < argc)
-    {
-         if (check_argv(argv[i]) == 0)
-         {
-             write(1, "Error", 5);//letters
-             exit(0);
-         }
-        node = ft_lstnew(f(ft_atoi(argv[i])));
-        ft_lstadd_back(&a, node);
-        i++;
-    }
-    if (duplicat(a) || argc == 1)
-    {
-        write(1, "Error", 5);//letters
-        ft_lstclear(&a, del);
-        exit(0);
-    }
-    return (a);
-}
-
-int main(int argc, char **argv)
-{
-    t_list  *a;
-    t_list  *b;
-    int     k;
-    int     i;
-    char    tab[4];
-  
-    i = 0;
-    a = check_and_make(argc ,argv);
-    k = 1;
-    while (k != 0) 
-    { 
-        k = read(0, &tab[i], 1);
-        if (tab[i] == '\n' && i != 0 && k != 0) 
-        {
-            tab[i + 1] = '\0';
-            instructions_fun(&a, &b, tab);
-            i = -1;
-        }
-        i++;
-    }
-    if (check_list(a) == 1 && b == 0)
-        write(1, "OK\n",3);
-    else
-        write(1, "KO\n",3);
-    ft_lstclear(&a, del);
-   //  system("leaks mix");
+	i = 0;
+	k = 1;
+	a = check_and_make(argc, argv);
+	while (k != 0)
+	{
+		k = read(0, &tab[i], 1);
+		if (tab[i] == '\n' && i < 4)
+		{
+			tab[i + 1] = '\0';
+			instructions_fun(&a, &b, tab);
+			i = -1;
+		}
+		if (i >= 4)
+			error_fun();
+		i++;
+	}
+	result_function(check_list(a), b);
+	ft_lstclear(&a, del);
 }
